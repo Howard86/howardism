@@ -62,7 +62,7 @@ importers:
       '@graphql-codegen/typescript-operations': ^3.0.1
       '@headlessui/react': ^1.7.13
       '@heroicons/react': ^2.0.16
-      '@hookform/resolvers': ^2.9.11
+      '@hookform/resolvers': ^3.0.0
       '@mapbox/rehype-prism': ^0.8.0
       '@mdx-js/loader': ^2.3.0
       '@mdx-js/react': ^2.3.0
@@ -115,7 +115,7 @@ importers:
     dependencies:
       '@headlessui/react': 1.7.13_biqbaboplfbrettd7655fr4n2y
       '@heroicons/react': 2.0.16_react@18.2.0
-      '@hookform/resolvers': 2.9.11_react-hook-form@7.43.4
+      '@hookform/resolvers': 3.0.0_react-hook-form@7.43.4
       '@mapbox/rehype-prism': 0.8.0
       '@mdx-js/loader': 2.3.0_webpack@5.75.0
       '@mdx-js/react': 2.3.0_react@18.2.0
@@ -3212,8 +3212,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@hookform/resolvers/2.9.11_react-hook-form@7.43.4:
-    resolution: {integrity: sha512-bA3aZ79UgcHj7tFV7RlgThzwSSHZgvfbt2wprldRkYBcMopdMvHyO17Wwp/twcJasNFischFfS7oz8Katz8DdQ==}
+  /@hookform/resolvers/3.0.0_react-hook-form@7.43.4:
+    resolution: {integrity: sha512-SQPefakODpyq25b/phHXDKCdRrEfPcCXV7B4nAa139wE1DxufYbbNAjeo0T04ZXBokRxZ+wD8iA1kkVMa3QwjQ==}
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
