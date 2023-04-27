@@ -38,7 +38,7 @@
     "focus-visible": "^5.2.0",
     "framer-motion": "^10.9.1",
     "graphql": "^16.6.0",
-    "graphql-request": "^5.2.0",
+    "graphql-request": "^6.0.0",
     "graphql-tag": "^2.12.6",
     "lodash.get": "^4.4.2",
     "lodash.throttle": "^4.1.1",
