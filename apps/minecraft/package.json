@@ -28,7 +28,7 @@
     "zustand": "^4.3.6"
   },
   "devDependencies": {
-    "@types/three": "^0.150.0"
+    "@types/three": "^0.152.0"
   },
   "browserslist": [
     ">0.2%",
