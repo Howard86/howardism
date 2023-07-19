@@ -42,7 +42,7 @@
     "framer-motion": "^10.12.17",
     "lodash.get": "^4.4.2",
     "lodash.throttle": "^4.1.1",
-    "monaco-editor": "^0.39.0",
+    "monaco-editor": "^0.40.0",
     "next": "^13.4.7",
     "next-api-handler": "^0.4.10",
     "next-auth": "^4.22.1",
