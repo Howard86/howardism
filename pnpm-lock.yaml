@@ -229,8 +229,8 @@ importers:
         specifier: ^8.4.24
         version: 8.4.24
       postcss-focus-visible:
-        specifier: ^8.0.2
-        version: 8.0.2(postcss@8.4.24)
+        specifier: ^9.0.0
+        version: 9.0.0(postcss@8.4.24)
       prisma:
         specifier: ^4.16.1
         version: 4.16.1
@@ -13276,8 +13276,8 @@ packages:
     dependencies:
       find-up: 4.1.0
 
-  /postcss-focus-visible@8.0.2(postcss@8.4.24):
-    resolution: {integrity: sha512-f/Vd+EC/GaKElknU59esVcRYr/Y3t1ZAQyL4u2xSOgkDy4bMCmG7VP5cGvj3+BTLNE9ETfEuz2nnt4qkZwTTeA==}
+  /postcss-focus-visible@9.0.0(postcss@8.4.24):
+    resolution: {integrity: sha512-zA4TbVaIaT8npZBEROhZmlc+GBKE8AELPHXE7i4TmIUEQhw/P/mSJfY9t6tBzpQ1rABeGtEOHYrW4SboQeONMQ==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
