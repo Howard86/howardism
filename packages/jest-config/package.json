@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/jest-dom": "^6.0.0",
     "jest-environment-jsdom": "^29.6.1",
     "jest-watch-typeahead": "^2.2.2",
     "whatwg-fetch": "^3.6.16"
