@@ -41,7 +41,7 @@
     "fast-glob": "^3.3.0",
     "feed": "^4.2.2",
     "focus-visible": "^5.2.0",
-    "framer-motion": "^10.12.22",
+    "framer-motion": "^11.0.0",
     "lodash.get": "^4.4.2",
     "lodash.throttle": "^4.1.1",
     "mapbox-gl": "^3.0.0",

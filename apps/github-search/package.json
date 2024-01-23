@@ -24,7 +24,7 @@
     "@emotion/styled": "^11.11.0",
     "@howardism/components-common": "workspace:^0.3.3",
     "@howardism/theme": "workspace:^0.2.6",
-    "framer-motion": "^10.12.22",
+    "framer-motion": "^11.0.0",
     "graphql": "^16.7.1",
     "graphql-tag": "^2.12.6",
     "next": "^14.0.0",
