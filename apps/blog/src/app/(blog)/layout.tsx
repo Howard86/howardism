@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata, Viewport } from "next";
 import { Fraunces, JetBrains_Mono, Newsreader } from "next/font/google";
-import { type ChildrenProps, Suspense } from "react";
+import type { ChildrenProps } from "react";
 
 import { ArticleNavProvider } from "@/components/article-nav-context";
 import GoogleAnalytics from "@/components/google-analytics";
@@ -157,9 +157,7 @@ export default function RootLayout({ children }: ChildrenProps) {
           <ArticleNavProvider>
             <SearchProvider>
               <div className="relative flex flex-1 flex-col">
-                <Suspense fallback={null}>
-                  <SiteBar />
-                </Suspense>
+                <SiteBar />
                 <main className="flex flex-1 flex-col" id="main-content">
                   {children}
                 </main>

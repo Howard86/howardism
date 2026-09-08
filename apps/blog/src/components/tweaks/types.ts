@@ -2,7 +2,7 @@ export type Mode = "light" | "dark";
 export type TextSize = "s" | "m" | "l";
 
 export interface Tweaks {
-  /** Spike: focus mode collapses chrome to running head only. */
+  /** Collapses the site chrome to a running head while reading. */
   focusMode: boolean;
   mode: Mode;
   /** E-reader tap-to-scroll edge zones (touch devices only). */
