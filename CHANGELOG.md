@@ -1,3 +1,9 @@
+# [v2.28.0](https://github.com/howard86/howardism/compare/v2.27.0...v2.28.0) (2026-09-08)
+
+## ✨ New Features
+- [`86f1664e`](https://github.com/howard86/howardism/commit/86f1664e)  feat(blog): refine article reading rhythm, mobile safe areas &amp; compare view 
+- [`d6392575`](https://github.com/howard86/howardism/commit/d6392575)  feat(blog): expand mobile nav, optimize tablet plates &amp; standardize zh-TW index
+
 # [v2.27.0](https://github.com/howard86/howardism/compare/v2.26.3...v2.27.0) (2026-09-03)
 
 ## ✨ New Features
