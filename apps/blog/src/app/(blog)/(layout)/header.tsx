@@ -13,7 +13,9 @@ import { Menu01Icon, Moon02Icon, Sun03Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
+import type { ArticleHeading } from "@/app/(blog)/articles/service";
 import { Container } from "@/app/(common)/container";
 import { useArticleNav } from "@/components/article-nav-context";
 import { ArticleFind } from "@/components/find/article-find";
@@ -22,6 +24,11 @@ import { SearchTrigger } from "@/components/search/search-trigger";
 import { TocSheet } from "@/components/toc-sheet";
 import { ReaderSettings } from "@/components/tweaks/reader-settings";
 import { useTweaks } from "@/components/tweaks/tweaks-provider";
+import {
+  HEADING_ACTIVE_OFFSET_PX,
+  measureArticleScroll,
+  subscribeToArticleScroll,
+} from "@/hooks/use-article-scroll";
 import useHasScrolled from "@/hooks/use-has-scrolled";
 
 import { Avatar } from "./avatar";
@@ -195,27 +202,109 @@ function MobileNav() {
   );
 }
 
+function FocusPlate({
+  headings,
+  onExit,
+}: {
+  headings: ArticleHeading[];
+  onExit: () => void;
+}) {
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const compute = () => {
+      const scroll = measureArticleScroll();
+      setProgress(scroll?.progress ?? 0);
+
+      let current: string | null = null;
+      for (const heading of headings) {
+        if (heading.depth !== 2) {
+          continue;
+        }
+        const el = document.getElementById(heading.id);
+        if (el && el.getBoundingClientRect().top <= HEADING_ACTIVE_OFFSET_PX) {
+          current = heading.text;
+        }
+      }
+      setActiveSection(current);
+    };
+
+    return subscribeToArticleScroll(compute);
+  }, [headings]);
+
+  const progressPercent = Math.round(progress * 100);
+
+  return (
+    <div className="fixed top-4 left-1/2 z-40 -translate-x-1/2 rounded-full border border-border bg-card/95 shadow-lg backdrop-blur-sm">
+      <div className="flex items-center gap-3 px-5 py-2.5">
+        <div
+          aria-hidden="true"
+          className="flex items-center gap-2 font-mono text-[11px] text-foreground-subtle tracking-[0.02em]"
+        >
+          <span className="max-w-[200px] truncate sm:max-w-[300px]">
+            Reading
+          </span>
+          {activeSection && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span className="max-w-[150px] truncate sm:max-w-[200px]">
+                {activeSection}
+              </span>
+            </>
+          )}
+          <span aria-hidden="true">·</span>
+          <span className="tabular-nums">{progressPercent}%</span>
+        </div>
+        <button
+          aria-label="Exit focus mode"
+          className="flex items-center justify-center rounded-full px-2.5 py-1 font-medium font-mono text-[10px] text-foreground-subtle transition-colors duration-[120ms] hover:bg-accent hover:text-foreground motion-reduce:transition-none"
+          onClick={onExit}
+          title="Exit focus mode"
+          type="button"
+        >
+          EXIT
+        </button>
+      </div>
+    </div>
+  );
+}
+
 /**
  * Persistent, context-aware top bar. Owns route nav + theme on every page, and
- * on article pages gains reader controls (TOC, reader settings) plus the
- * reading-progress bar rendered as its bottom edge. Condenses on scroll.
+ * on article pages gains reader controls (TOC, reader settings, focus mode)
+ * plus the reading-progress bar rendered as its bottom edge. Condenses on
+ * scroll; in focus mode the chrome collapses to the running head instead.
  */
 export function SiteBar() {
   const isScrolled = useHasScrolled({ offsetPx: 80 });
-  const isArticle = useArticleNav() !== null;
+  const articleNav = useArticleNav();
+  const isArticle = articleNav !== null;
+  const { state, setFocusMode } = useTweaks();
+  // focusMode is persisted, so scope it to article pages: elsewhere there is no
+  // running head to carry EXIT, and collapsed chrome would be a dead end.
+  const isFocusMode = isArticle && state.focusMode;
+
+  let chromeClass = "py-4 opacity-100 duration-200";
+  if (isFocusMode) {
+    chromeClass =
+      "pointer-events-none h-0 overflow-hidden py-0 opacity-0 duration-[120ms]";
+  } else if (isScrolled) {
+    chromeClass = "py-2 opacity-100 duration-200";
+  }
 
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-colors duration-200",
+        "sticky top-0 z-50 transition-colors duration-200 motion-reduce:transition-none",
         isScrolled && "border-border border-b bg-background/20 backdrop-blur-sm"
       )}
     >
       <Container className="relative w-full">
         <div
           className={cn(
-            "flex items-center gap-2 transition-[padding] duration-200 sm:gap-3",
-            isScrolled ? "py-2" : "py-4"
+            "flex items-center gap-2 transition-all motion-reduce:transition-none sm:gap-3",
+            chromeClass
           )}
         >
           {/* Wordmark + avatar pill */}
@@ -248,6 +337,19 @@ export function SiteBar() {
                 </span>
                 <ArticleFind />
                 <ReaderSettings />
+                {!state.focusMode && (
+                  <button
+                    aria-label="Enter focus mode"
+                    className="flex size-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                    onClick={() => setFocusMode(true)}
+                    title="Focus mode"
+                    type="button"
+                  >
+                    <span className="font-medium font-mono text-[10px]">
+                      FOCUS
+                    </span>
+                  </button>
+                )}
               </div>
               <span
                 aria-hidden="true"
@@ -262,7 +364,14 @@ export function SiteBar() {
         </div>
       </Container>
 
-      {isArticle && <ReadingProgress />}
+      {isArticle && <ReadingProgress headings={articleNav.headings} />}
+
+      {isFocusMode && (
+        <FocusPlate
+          headings={articleNav.headings}
+          onExit={() => setFocusMode(false)}
+        />
+      )}
     </header>
   );
 }

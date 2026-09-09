@@ -176,6 +176,16 @@ describe("tweaks-provider", () => {
     localStorage.setItem(TWEAKS_STORAGE_KEY, JSON.stringify({ mode: "dark" }));
     expect(Object.is(readStorage(), DEFAULT_TWEAKS)).toBe(false);
   });
+
+  it("starts with focus mode off and round-trips a stored preference", () => {
+    expect(DEFAULT_TWEAKS.focusMode).toBe(false);
+
+    localStorage.setItem(
+      TWEAKS_STORAGE_KEY,
+      JSON.stringify({ ...DEFAULT_TWEAKS, focusMode: true })
+    );
+    expect(readStorage().focusMode).toBe(true);
+  });
 });
 
 // ── ReaderSettings (Aa popover + `t` shortcut) ──────────────────────────────
