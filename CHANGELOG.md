@@ -1,3 +1,13 @@
+# [v2.29.0](https://github.com/howard86/howardism/compare/v2.28.0...v2.29.0) (2026-09-09)
+
+## ✨ New Features
+- [`3599f9fa`](https://github.com/howard86/howardism/commit/3599f9fa)  feat: add reader spike features behind ?readerSpike&#x3D;1 query 
+- [`9ebf6b15`](https://github.com/howard86/howardism/commit/9ebf6b15)  feat: remove FocusPlate delayed mount for instant EXIT availability 
+
+## 🐛 Bug Fixes
+- [`97db2038`](https://github.com/howard86/howardism/commit/97db2038)  fix: make EXIT button accessible in focus mode 
+- [`6a93876a`](https://github.com/howard86/howardism/commit/6a93876a)  fix: wrap SiteBar in Suspense to fix static generation
+
 # [v2.28.0](https://github.com/howard86/howardism/compare/v2.27.0...v2.28.0) (2026-09-08)
 
 ## ✨ New Features
